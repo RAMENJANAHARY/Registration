@@ -4,6 +4,9 @@ import os
 
 app = Flask(__name__)
 
+# Retrieve the API key and port from environment variables
+GOOGLE_API_KEY = os.getenv("AIzaSyC34XpHsl-avtNInQ2w7Lgqc72S15KdCpI")
+
 # Configure Flask-Mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -42,4 +45,6 @@ def thank_you():
     return '<h1>Thank you for registering! A welcome email has been sent to you.</h1>'
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use the PORT environment variable or default to 5000 for local testing
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
